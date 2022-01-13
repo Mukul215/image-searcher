@@ -5,9 +5,12 @@ class Searchbar extends Component {
     term: "",
   };
 
-  onFormSubmit(event) {
+  onFormSubmit = (event) => {
     event.preventDefault();
-  }
+
+    // invoke function that was passed down from parent
+    this.props.onSubmit(this.state.term);
+  };
 
   // put logic above this line
   render() {
@@ -20,7 +23,6 @@ class Searchbar extends Component {
           value={this.state.term}
           onChange={(e) => this.setState({ term: e.target.value })}
         />
-        <p>{this.state.term}</p>
       </form>
     );
   }
