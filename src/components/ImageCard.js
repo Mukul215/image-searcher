@@ -4,6 +4,8 @@ export default class ImageCard extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { spans: 0 };
+
     this.imageRef = React.createRef();
   }
 
@@ -13,15 +15,17 @@ export default class ImageCard extends Component {
 
   setSpans = () => {
     const height = this.imageRef.current.clientHeight;
-    const spans = Math.ceil(height / 150);
+    const spans = Math.ceil(height / 10);
 
-    this.imageRef.current.style.gridRowEnd = `span ${spans}`;
+    this.setState({ spans });
+
+    // this.imageRef.current.style.gridRowEnd = `span ${spans}`;
   };
 
   render() {
     const { description, urls } = this.props.images;
     return (
-      <div>
+      <div style={{ gridRowEnd: `span ${this.state.spans}` }}>
         <img ref={this.imageRef} alt={description} src={urls.regular} />
       </div>
     );
